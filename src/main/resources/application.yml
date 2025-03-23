@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: flowable-sample
+server:
+  port: 8081
