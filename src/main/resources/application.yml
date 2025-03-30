@@ -19,3 +19,8 @@ mybatis:
 logging:
   level:
     com.zzq: debug
+flowable:
+  #  是否激活异步执行器
+  async-executor-activate: false
+  # 数据库模式更新策略，true表示自动更新数据库模式
+  database-schema-update: true
