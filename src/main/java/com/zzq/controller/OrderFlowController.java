@@ -24,11 +24,20 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Zhou Zhongqing
+ * 2025-04-01
+ * 订单流程控制器
+ */
 @RestController
 @RequestMapping("/orderFlow")
 public class OrderFlowController {
 
     private static final Logger log = LoggerFactory.getLogger(OrderFlowController.class);
+
+    @Resource
+    private HistoryService historyService;
+
     @Resource
     private RepositoryService repositoryService;
 
@@ -41,6 +50,12 @@ public class OrderFlowController {
     @Resource
     private ProcessEngine processEngine;
 
+    /**
+     * 开始流程
+     * @param customer
+     * @param total
+     * @return
+     */
     @PostMapping("/create_order")
     public ResponseEntity<String> startFlow(String customer, Integer total) {
         Map<String, Object> map = new HashMap<>();
@@ -54,6 +69,10 @@ public class OrderFlowController {
     }
 
 
+    /**
+     * 订单列表，待确认的，返回任务id
+     * @return
+     */
     @RequestMapping("/order_list")
     public String getOrderList() {
         List<Task> list = taskService.createTaskQuery().taskAssignee("manager").list();
@@ -63,6 +82,11 @@ public class OrderFlowController {
         return stringBuffer.toString();
     }
 
+    /**
+     * 经理确认
+     * @param taskId
+     * @return
+     */
     @PostMapping("/confirm/{taskId}")
     public ResponseEntity<String> confirm(@PathVariable String taskId) {
         Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
@@ -72,10 +96,13 @@ public class OrderFlowController {
         return ResponseEntity.ok("success");
     }
 
-    @Resource
-    private HistoryService historyService;
 
-
+    /**
+     * 生成图，某个流程处理进度显示
+     * @param response
+     * @param processId
+     * @throws Exception
+     */
     @GetMapping(value = "/processDiagram/{processId}")
     public void genProcessDiagram(HttpServletResponse response, @PathVariable("processId") String processId) throws Exception{
         ProcessInstance pi = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
