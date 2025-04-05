@@ -38,11 +38,11 @@ public class OrderFlowController {
     @Resource
     private ProcessEngine processEngine;
 
-    @RequestMapping("/create_order")
+    @PostMapping("/create_order")
     public ResponseEntity<String> startFlow(String customer,Integer total){
         Map<String,Object> map = new HashMap<>();
         map.put("order",new Order(customer,total));
-        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("order_flow");
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("flowable-sample",map);
         String processId = processInstance.getId();
         log.info("{} 流程实例ID:{} ",processInstance.getProcessDefinitionName(),processId);
         Task task = taskService.createTaskQuery().processInstanceId(processId).active().singleResult();
@@ -56,7 +56,7 @@ public class OrderFlowController {
         List<Task> list = taskService.createTaskQuery().taskAssignee("manager").list();
         StringBuffer stringBuffer = new StringBuffer();
         list.stream().forEach(task->stringBuffer.append(task.getId()
-        +":" + runtimeService.getVariable(task.getExecutionId(),"order") +""));
+        +" : " + runtimeService.getVariable(task.getExecutionId(),"order") +"\n"));
         return stringBuffer.toString();
     }
     @PostMapping("/confirm/{taskId}")
