@@ -22,7 +22,8 @@ public class UserController {
 
     @RequestMapping("/list")
     public String list(){
-        List<User> list = userService.list();
+//        List<User> list = userService.list();
+        List<User> list = userService.userList();
         String str = null;
         try {
             str = objectMapper.writeValueAsString(list);

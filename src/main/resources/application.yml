@@ -7,7 +7,7 @@ server:
   port: 8080
 
 # MyBatis配置
-mybatis:
+mybatis-plus:
   # 搜索指定包别名
   typeAliasesPackage: com.zzq.domain
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
