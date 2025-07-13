@@ -4,11 +4,15 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 @TableName(value = "t_order")
 public class Order implements Serializable {
 
+
+    @Serial
+    private static final long serialVersionUID = 8347055723013141158L;
 
     public Order() {
     }
