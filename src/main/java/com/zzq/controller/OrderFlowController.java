@@ -52,14 +52,14 @@ public class OrderFlowController {
 
     /**
      * 开始流程
-     * @param customer
+     * @param content
      * @param totalPrice
      * @return
      */
     @PostMapping("/create_order")
-    public ResponseEntity<String> startFlow(String customer, Integer totalPrice) {
+    public ResponseEntity<String> startFlow(String content, Integer totalPrice) {
         Map<String, Object> map = new HashMap<>();
-        map.put("order", new Order(customer, totalPrice));
+        map.put("order", new Order(content, totalPrice));
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("flowable-sample", map);
         String processId = processInstance.getId();
         log.info("{} 流程实例ID:{} ", processInstance.getProcessDefinitionName(), processId);
