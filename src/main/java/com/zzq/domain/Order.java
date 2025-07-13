@@ -13,15 +13,15 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(String customer, Integer total) {
+    public Order(String customer, Integer totalPrice) {
         this.customer = customer;
-        this.total = total;
+        this.totalPrice = totalPrice;
     }
 
-    public Order(Integer id, String customer, Integer total) {
+    public Order(Integer id, String customer, Integer totalPrice) {
         this.id = id;
         this.customer = customer;
-        this.total = total;
+        this.totalPrice = totalPrice;
     }
 
     @TableId(value = "id",type = IdType.AUTO)
@@ -29,7 +29,7 @@ public class Order implements Serializable {
 
     private String customer;
 
-    private Integer total;
+    private Integer totalPrice;
 
 
     public Integer getId() {
@@ -48,11 +48,11 @@ public class Order implements Serializable {
         this.customer = customer;
     }
 
-    public Integer getTotal() {
-        return total;
+    public Integer getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setTotal(Integer total) {
-        this.total = total;
+    public void setTotalPrice(Integer totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }
