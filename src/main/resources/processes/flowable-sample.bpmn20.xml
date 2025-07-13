@@ -15,9 +15,6 @@
     <endEvent id="sid-458B136C-F70E-4F2F-8EF8-B8038BFDC75D"></endEvent>
     <endEvent id="sid-0991F7A3-0B9D-4763-AA5A-060B79427484"></endEvent>
     <serviceTask id="sid-8FBCE140-C189-4A11-8CB1-6224222F1690" name="邮件抄送" flowable:class="com.zzq.process.SendMailProcess"></serviceTask>
-    <sequenceFlow id="sid-1D0192A4-1FEF-449F-B918-09194494AA73" name="大于1000" sourceRef="sid-060062A1-59EA-4EDA-AD51-1E01D891F282" targetRef="sid-8FBCE140-C189-4A11-8CB1-6224222F1690">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${order.total > 1000}]]></conditionExpression>
-    </sequenceFlow>
     <sequenceFlow id="sid-149CBCC5-4E31-4AFF-8D26-EEF98773F714" sourceRef="sid-8FBCE140-C189-4A11-8CB1-6224222F1690" targetRef="sid-3E9D2A46-2823-4C4F-9E2F-41A882B33B69"></sequenceFlow>
     <serviceTask id="sid-7868D63D-AC97-43B1-9380-C0ED9AD9A768" name="创建订单" flowable:class="com.zzq.process.CreateOderProcess"></serviceTask>
     <sequenceFlow id="sid-BF10CCBD-7066-4C16-9777-CC7A14AAA85E" sourceRef="sid-060062A1-59EA-4EDA-AD51-1E01D891F282" targetRef="sid-7868D63D-AC97-43B1-9380-C0ED9AD9A768"></sequenceFlow>
@@ -25,6 +22,9 @@
     <serviceTask id="sid-E3D8BBA0-0B88-40FF-91CD-8101DBDCF668" name="创建订单-经理确认后" flowable:class="com.zzq.process.CreateOderProcess"></serviceTask>
     <sequenceFlow id="sid-67C20067-44EB-457D-BE71-BF101A727CF4" sourceRef="sid-3E9D2A46-2823-4C4F-9E2F-41A882B33B69" targetRef="sid-E3D8BBA0-0B88-40FF-91CD-8101DBDCF668"></sequenceFlow>
     <sequenceFlow id="sid-821747EA-D8D7-457B-80E3-A8ACBDDC68F4" sourceRef="sid-E3D8BBA0-0B88-40FF-91CD-8101DBDCF668" targetRef="sid-458B136C-F70E-4F2F-8EF8-B8038BFDC75D"></sequenceFlow>
+    <sequenceFlow id="sid-1D0192A4-1FEF-449F-B918-09194494AA73" name="大于1000" sourceRef="sid-060062A1-59EA-4EDA-AD51-1E01D891F282" targetRef="sid-8FBCE140-C189-4A11-8CB1-6224222F1690">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${order.totalPrice> 1000}]]></conditionExpression>
+    </sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_flowable-sample">
     <bpmndi:BPMNPlane bpmnElement="flowable-sample" id="BPMNPlane_flowable-sample">
